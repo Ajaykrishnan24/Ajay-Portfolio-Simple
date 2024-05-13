@@ -78,40 +78,77 @@ for (let i = 0; i < selectItems.length; i++) {
 // filter variables
 const filterItems = document.querySelectorAll("[data-filter-item]");
 
+// const filterFunc = function (selectedValue) {
+
+//   for (let i = 0; i < filterItems.length; i++) {
+
+//     if (selectedValue === "all") {
+//       filterItems[i].classList.add("active");
+//     } else if (selectedValue === filterItems[i].dataset.category) {
+//       filterItems[i].classList.add("active");
+//     } else {
+//       filterItems[i].classList.remove("active");
+//     }
+
+//   }
+
+// }
 const filterFunc = function (selectedValue) {
-
   for (let i = 0; i < filterItems.length; i++) {
-
     if (selectedValue === "all") {
       filterItems[i].classList.add("active");
-    } else if (selectedValue === filterItems[i].dataset.category) {
+    } else if (selectedValue === "cloud" && filterItems[i].dataset.category === "web development") {
+      filterItems[i].classList.add("active");
+    } else if (selectedValue === "python" && filterItems[i].dataset.category === "web design") {
+      filterItems[i].classList.add("active");
+    } else if (selectedValue === "others" && filterItems[i].dataset.category === "applications") {
       filterItems[i].classList.add("active");
     } else {
       filterItems[i].classList.remove("active");
     }
-
   }
-
 }
 
+
+
+// add event in all filter button items for large screen
+// let lastClickedBtn = filterBtn[0];
+
+// for (let i = 0; i < filterBtn.length; i++) {
+
+//   filterBtn[i].addEventListener("click", function () {
+
+//     let selectedValue = this.innerText.toLowerCase();
+//     selectValue.innerText = this.innerText;
+//     filterFunc(selectedValue);
+
+//     lastClickedBtn.classList.remove("active");
+//     this.classList.add("active");
+//     lastClickedBtn = this;
+
+//   });
+
+// }
 // add event in all filter button items for large screen
 let lastClickedBtn = filterBtn[0];
 
 for (let i = 0; i < filterBtn.length; i++) {
-
   filterBtn[i].addEventListener("click", function () {
-
     let selectedValue = this.innerText.toLowerCase();
+    if (selectedValue === "all") selectedValue = "all";
+    else if (selectedValue === "cloud") selectedValue = "cloud";
+    else if (selectedValue === "python") selectedValue = "python";
+    else selectedValue = "others";
+
     selectValue.innerText = this.innerText;
     filterFunc(selectedValue);
 
     lastClickedBtn.classList.remove("active");
     this.classList.add("active");
     lastClickedBtn = this;
-
   });
-
 }
+
 
 
 
@@ -136,24 +173,54 @@ for (let i = 0; i < formInputs.length; i++) {
 
 
 
-// page navigation variables
-const navigationLinks = document.querySelectorAll("[data-nav-link]");
+// page navigation variables-eda mowne
+const navigationLinks = document.querySelectorAll("[data-page]");
 const pages = document.querySelectorAll("[data-page]");
 
 // add event to all nav link
 for (let i = 0; i < navigationLinks.length; i++) {
   navigationLinks[i].addEventListener("click", function () {
 
-    for (let i = 0; i < pages.length; i++) {
-      if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
-        pages[i].classList.add("active");
+    for (let j = 0; j < pages.length; j++) {
+      if (this.getAttribute("data-page") === pages[j].dataset.page) {
+        pages[j].classList.add("active");
         navigationLinks[i].classList.add("active");
         window.scrollTo(0, 0);
       } else {
-        pages[i].classList.remove("active");
-        navigationLinks[i].classList.remove("active");
+        pages[j].classList.remove("active");
+        navigationLinks[j].classList.remove("active");
       }
     }
 
   });
 }
+
+//opening the certificates
+// Get all eye icon elements by their class
+const eyeIcons = document.querySelectorAll(".eyeIcon");
+
+// Function to open the PDF document when an eye icon is clicked
+const openPdfDocument = function (event) {
+  // Prevent the default behavior of the click event
+  event.preventDefault();
+
+  // Get the parent <a> element
+  const parentLink = this.closest("a");
+
+  // Get the data-document attribute value from the parent <a> element
+  const documentName = parentLink.getAttribute("data-document");
+
+  // Construct the path to the PDF document in the assets folder
+  const documentPath = `./assets/Certification/PDF/${documentName}`;
+
+  // Open the PDF document in a new tab
+  window.open(documentPath, "_blank");
+}
+
+// Attach click event to all eye icons
+eyeIcons.forEach(icon => {
+  icon.addEventListener("click", openPdfDocument);
+});
+
+//awards
+

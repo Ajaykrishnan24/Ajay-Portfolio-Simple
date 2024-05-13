@@ -29,12 +29,13 @@
     hsl(0, 0%, 19%) 97%
   ); */
   --bg-gradient-onyx: linear-gradient(250deg, #020532 12%, #034724 74%);
+  --bg-gradient-maroon: radial-gradient(circle , rgb(1, 4, 58) 12%, rgb(4, 4, 4) 40%, rgb(30, 0, 48) 70%, rgb(11, 94, 29) 100%);
   /* background for role dev test */
   --bg-gradient-jet: linear-gradient(
     to bottom right, 
-    hsla(240, 1%, 18%, 0.251) 0%, 
-    hsla(240, 2%, 11%, 0) 100%
-  ), hsl(240, 2%, 13%);
+    hsla(76, 93%, 6%, 0.94) 0%, 
+    hsl(245, 96%, 28%) 100%
+  ), hsl(240, 82%, 13%);/*box colour for pythondevtesteretc*/
   --bg-gradient-yellow-1: linear-gradient(
     to bottom right, 
     hsl(45, 100%, 71%) 0%, 
@@ -47,25 +48,26 @@
   ), hsl(240, 2%, 13%);
   --border-gradient-onyx: linear-gradient(
     to bottom right, 
-    hsl(0, 0%, 25%) 0%, 
-    hsla(0, 0%, 25%, 0) 50%
+    hsl(0, 100%, 50%) 0%, 
+    hsl(186, 93%, 29%) 50%
   );
   --text-gradient-yellow: linear-gradient(
     to right, 
-    hsl(122, 42%, 28%), 
-    hsl(119, 100%, 50%)
+    hsl(287, 83%, 19%), 
+    hsl(0, 97%, 47%)
   );/* underline about me */
 
   /* solid */
 
-  --jet: hsl(28, 100%, 51%);
-  --onyx: hsla(132, 93%, 16%, 0.967);/*SDET*/
+  --jet: hsl(182, 100%, 50%);
+  --statusbar: hsl(240, 100%, 99%);
+  --onyx: hsl(0, 89%, 7%);/*SDET*/
   --eerie-black-1: hsl(240, 3%, 13%);
-  --eerie-black-2: hsla(140, 94%, 13%, 0.512);/*box Background*/
-  --smoky-black: hsl(137, 81%, 50%); /* Website background */
+  --eerie-black-2: hsla(254, 73%, 19%, 0.744);/*box Background*/
+  --smoky-black: hsl(273, 95%, 15%); /* Website background */
   --white-1: hsl(0, 0%, 100%);
   --white-2: hsl(0, 0%, 98%);
-  --orange-yellow-crayola: hsla(119, 94%, 37%, 0.899);/*icons*/
+  --orange-yellow-crayola: hsl(190, 96%, 47%);/*icons*/
   --vegas-gold: hsl(45, 54%, 58%);
   --light-gray: hsl(0, 0%, 84%);
   --light-gray-70: hsla(0, 0%, 84%, 0.7);
@@ -158,8 +160,21 @@ input, textarea {
 
 html { font-family: var(--ff-poppins); }
 
-body { background: var(--smoky-black); }
-
+body { background: rgb(42,7,9);
+  background: radial-gradient(circle, rgb(72, 58, 129) 22%, rgba(2,2,4,1) 41%, rgb(27, 4, 89) 92%, rgb(81, 4, 197) 100%);
+  background-size: 400% 400%;
+  animation: gradient 20s ease infinite; }
+  @keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
 
 
 
@@ -284,6 +299,7 @@ article.active {
   box-shadow: var(--shadow-2);
   cursor: pointer;
   z-index: 1;
+  margin-bottom:30px;
 }
 
 .content-card::before {
@@ -335,7 +351,7 @@ main {
 }
 
 .avatar-box {
-  background: var(--bg-gradient-onyx);
+  background: var(--bg-gradient-maroon);
   border-radius: 20px;
 }
 
@@ -699,7 +715,7 @@ main {
 
 .modal-close-btn ion-icon { --ionicon-stroke-width: 50px; }
 
-.modal-avatar-box {
+.bg-gradient-onyx {
   background: var(--bg-gradient-onyx);
   width: max-content;
   border-radius: 14px;
@@ -736,8 +752,8 @@ main {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  gap: 15px;
-  margin: 0 -15px;
+  gap: 5px;
+  margin: 0 -5px;
   padding: 25px;
   padding-bottom: 25px;
   overflow-x: auto;
@@ -745,11 +761,14 @@ main {
   overscroll-behavior-inline: contain;
   scroll-snap-type: inline mandatory;
   scroll-padding-inline: 25px;
+  
 }
 
 .clients-item {
   min-width: 50%;
   scroll-snap-align: start;
+  margin: -10px;
+
 }
 
 .clients-item img {
@@ -797,7 +816,18 @@ main {
   font-size: var(--fs-6);
   line-height: 1.3;
   margin-bottom: 7px;
-  color: hsl(89, 100%, 51%);;
+  color: hsl(89, 100%, 51%);
+}
+
+.timeline-item1 { position: relative; }
+
+.timeline-item1:not(:last-child) { margin-bottom: 20px; }
+
+.timeline-item1-title {
+  font-size: var(--fs-6);
+  line-height: 1.3;
+  margin-bottom: 7px;
+  color: hsl(89, 100%, 51%);
 }
 
 .timeline-list span {
@@ -806,13 +836,14 @@ main {
   line-height: 1.6;
 }
 
+
 .timeline-item:not(:last-child)::before {
   content: "";
   position: absolute;
   top: 5px;
   left: -30px;
   width: 1px;
-  height: calc(100% + 295px);
+  height: calc(200%);
   background: var(--jet);
 }
 
@@ -828,10 +859,34 @@ main {
   box-shadow: 0 0 0 4px var(--jet);
 }
 
+.timeline-item1:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: -30px;
+  width: 1px;
+  height: calc(100% );
+  background: var(--jet);
+}
+
+.timeline-item1.about {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: -33px;
+  height: 6px;
+  width: 6px;
+  background: var(--text-gradient-yellow);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px var(--jet);
+}
+
 .timeline-text {
-  color: rgb(3, 179, 26);
+  color: hsl(49, 100%, 50%);
   font-weight: var(--fw-300);
   line-height: 1.6;
+  font-weight: normal;
+  font-size: 13px;
 }
 
 
@@ -860,7 +915,7 @@ main {
 }
 
 .skill-progress-bg {
-  background: var(--jet);
+  background: var(--statusbar);
   width: 100%;
   height: 8px;
   border-radius: 10px;
@@ -1382,7 +1437,8 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .navbar-list { gap: 20px; }
 
-  .navbar-link { --fs-8: 14px; }
+  .
+   { --fs-8: 14px; }
 
 
 
@@ -1494,6 +1550,7 @@ textarea.form-input::-webkit-resizer { display: none; }
    */
 
   .timeline-list { margin-left: 65px; }
+  .timeline-list1 { margin-left: 65px; }
 
   .timeline-item:not(:last-child)::before { left: -40px; }
 
@@ -1777,7 +1834,12 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   body::-webkit-scrollbar { width: 20px; }
 
-  body::-webkit-scrollbar-track { background: var(--smoky-black); }
+  body::-webkit-scrollbar-track { 
+    background: rgb(42,7,9);
+    background: radial-gradient(circle, rgba(42,7,9,1) 22%, rgba(2,2,4,1) 41%, rgb(59, 1, 2) 92%, rgb(134, 3, 80) 100%);
+    
+    animation-name: ;
+  }
 
   body::-webkit-scrollbar-thumb {
     border: 5px solid var(--smoky-black);
@@ -1891,7 +1953,8 @@ textarea.form-input::-webkit-resizer { display: none; }
     font-weight: var(--fw-300);
     line-height: 1.6;
   }
-  .company {
+  .company 
+  {
     display: flex;
     align-items: center;
     padding-left: 20px;
@@ -1899,7 +1962,10 @@ textarea.form-input::-webkit-resizer { display: none; }
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 20px;
-}
+    margin-top: 20px;
+  }
+
+  
 
 .company img {
 
@@ -1912,5 +1978,46 @@ textarea.form-input::-webkit-resizer { display: none; }
     font-size: 18px;
     font-weight: bold;
 }
+
+#typing-animation {
+  position: relative;
+  font-size: 12px;
+  font-weight: bold;
+  color: rgb(0, 234, 255);
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 4s steps(20, end) ;
+}
+
+#typing-animation:before {
+  content: "";
+  /* position: absolute; */
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background-color: #6b5f5f;
+  animation: typing-cursor 2s ease-in-out infinite;
+
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes typing-cursor {
+  from {
+    width: 0px;
+  }
+  to {
+    width: 0;
+  }
+}
+
 
 }
